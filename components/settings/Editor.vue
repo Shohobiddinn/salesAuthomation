@@ -1,0 +1,134 @@
+<template>
+  <div class="control-section">
+    <div class="sample-container">
+      <div class="default-section">
+        <div id="defaultRTE">
+          <p>The Rich Text Editor is a WYSIWYG ("what you see is what you get") editor useful to create and edit content and return the valid <a href='https://ej2.syncfusion.com/home/' target='_blank'>HTML markup</a> or <a href='https://ej2.syncfusion.com/home/' target='_blank'>markdown</a> of the content</p>
+
+          <p><b>Toolbar</b></p>
+          <ol>
+            <li>
+              <p>The Toolbar contains commands to align the text, insert a link, insert an image, insert list, undo/redo operations, HTML view, etc </p>
+            </li>
+            <li>
+              <p>The Toolbar is fully customizable </p>
+            </li>
+          </ol>
+
+          <p><b>Links</b></p>
+          <ol>
+            <li>
+              <p>You can insert a hyperlink with its corresponding dialog </p>
+            </li>
+            <li>
+              <p>Attach a hyperlink to the displayed text. </p>
+            </li>
+            <li>
+              <p>Customize the quick toolbar based on the hyperlink </p>
+            </li>
+          </ol>
+
+          <p><b>Image.</b></p>
+          <ol>
+            <li>
+              <p>Allows you to insert images from an online source as well as the local computer </p>
+            </li>
+            <li>
+              <p>You can upload an image </p>
+            </li>
+            <li>
+              <p>Provides an option to customize the quick toolbar for an image </p>
+            </li>
+          </ol>
+          <img alt="Logo" src="./src/rich-text-editor/images/RTEImage-Feather.png" style="width: 300px;"/>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</template>
+
+<script>
+export default {
+  name: "Editor"
+}
+</script>
+
+<style scoped>
+.e-code-mirror::before {
+  content: '\e345';
+}
+
+.e-html-preview::before {
+  content: '\e350';
+}
+
+.CodeMirror-linenumber,
+.CodeMirror-gutters {
+  display: none;
+}
+
+.sb-header {
+  z-index: 100;
+}
+
+.fabric-dark .cm-s-default .cm-tag,
+.bootstrap5-dark .cm-s-default .cm-tag,
+.material-dark .cm-s-default .cm-tag,
+.tailwind-dark .cm-s-default .cm-tag,
+.highcontrast .cm-s-default .cm-tag {
+  color: #00ff00;
+}
+
+.fabric-dark .cm-s-default .cm-string,
+.bootstrap5-dark .cm-s-default .cm-string,
+.material-dark .cm-s-default .cm-string,
+.tailwind-dark .cm-s-default .cm-string {
+  color: blue;
+}
+
+.highcontrast .cm-s-default .cm-string {
+  color: #ffd939;
+}
+
+.fabric-dark .cm-s-default .cm-attribute,
+.bootstrap5-dark .cm-s-default .cm-attribute,
+.material-dark .cm-s-default .cm-attribute,
+.tailwind-dark .cm-s-default .cm-attribute,
+.highcontrast .cm-s-default .cm-attribute {
+  color: #f00;
+}
+
+.fabric-dark .CodeMirror,
+.bootstrap5-dark .CodeMirror,
+.material-dark .CodeMirror,
+.tailwind-dark .CodeMirror {
+  background:  #303030;
+}
+
+.highcontrast .CodeMirror {
+  background: black;
+}
+
+.sb-content.e-view.hide-header {
+  top: 0 !important;
+}
+
+.sb-header.e-view.hide-header {
+  display: none;
+}
+
+.e-richtexteditor .e-rte-content .e-content pre {
+  padding: 10px;
+  background: #F4F5F7;
+}
+
+.fabric-dark .e-richtexteditor .e-rte-content .e-content pre,
+.bootstrap5-dark .e-richtexteditor .e-rte-content .e-content pre,
+.material-dark .e-richtexteditor .e-rte-content .e-content pre,
+.tailwind-dark .e-richtexteditor .e-rte-content .e-content pre,
+.highcontrast .e-richtexteditor .e-rte-content .e-content pre {
+  padding: 10px;
+  background: #303030;
+}
+</style>

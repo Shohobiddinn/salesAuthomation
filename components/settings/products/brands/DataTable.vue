@@ -1,0 +1,96 @@
+<template>
+  <div class="rounded-lg bg-white border-grey py-3">
+    <div class="flex flex-row gap-4 px-4 items-center">
+      <div @click="draggable = true">
+        <i-btn>
+          <IconColsSVG />
+        </i-btn>
+      </div>
+      <table-filter :templates="brandsStore.templates"></table-filter>
+      <div>
+        <search-input @change="brandsStore.search" class="w-full h-38px" />
+      </div>
+      <div>
+        <excel-btn :size="'340kb'"></excel-btn>
+      </div>
+    </div>
+    <div class="mt-3 w-full overflow-auto">
+      <data-table
+        :headers="brandsStore.templates"
+        @sort="brandsStore.sortData"
+        :sorted="brandsStore.params.order_by"
+      >
+        <template #body>
+          <c-tr v-for="data in brandsStore.data?.items" :key="data">
+            <c-td v-for="key in brandsStore.templates" :key="key">
+              <div v-if="key.checked">
+                {{ data[key.key] }}
+              </div>
+            </c-td>
+            <c-td>
+              <div class="p-2 td-shadow">
+                <IconEdit
+                  @click="() => dialogStore.edit({ ...data })"
+                ></IconEdit>
+              </div>
+            </c-td>
+          </c-tr>
+        </template>
+      </data-table>
+    </div>
+    <div class="flex justify-between w-full">
+      <div class="flex p-3 gap-2 items-center">
+        <span class="secondary-gray-text fs-14"> Показать по </span>
+        <page-size-btn
+          :current-size="brandsStore.params.page_size"
+          @setPageSize="brandsStore.setPageSize"
+        />
+      </div>
+      <div class="p-3">
+        <page-index
+          :available-pages="brandsStore.data?.total_pages"
+          :current-page="brandsStore.data?.page_number"
+          @setPage="brandsStore.setPage"
+        />
+      </div>
+    </div>
+  </div>
+  <transition name="modal">
+    <div v-if="draggable">
+      <d-modal @closeDialog="draggableDialog" :name="'Управление меню таблицы'">
+        <drag-and-drop
+          @change="change"
+          :templates="brandsStore.templates"
+        ></drag-and-drop>
+      </d-modal>
+    </div>
+  </transition>
+</template>
+
+<script setup>
+// State
+const props = defineProps({
+  brandsStore: Object,
+});
+
+const searchText = ref("");
+const availablePages = ref(28);
+let currentPage = ref(1);
+let pageSize = ref(10);
+const draggable = ref(false);
+function draggableDialog() {
+  draggable.value = false;
+}
+function change(param) {
+  props.brandsStore.templates = param;
+  draggable.value = false;
+}
+
+// State
+const { isActive } = toRefs(props);
+
+// Stores
+const dialogStore = useDialogStore("brands");
+</script>
+
+<style scoped></style>

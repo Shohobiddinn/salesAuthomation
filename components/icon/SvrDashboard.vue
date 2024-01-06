@@ -1,0 +1,31 @@
+<template>
+  <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <rect width="24" height="24" rx="8" fill="#012E2E"/>
+    <g clip-path="url(#clip0_3837_892)">
+      <path
+          d="M9.5 6H8C6.89543 6 6 6.89543 6 8V9.5C6 10.6046 6.89543 11.5 8 11.5H9.5C10.6046 11.5 11.5 10.6046 11.5 9.5V8C11.5 6.89543 10.6046 6 9.5 6Z"
+          fill="#F0F3F3"/>
+      <path
+          d="M16 6H14.5C13.3954 6 12.5 6.89543 12.5 8V9.5C12.5 10.6046 13.3954 11.5 14.5 11.5H16C17.1046 11.5 18 10.6046 18 9.5V8C18 6.89543 17.1046 6 16 6Z"
+          fill="#F0F3F3"/>
+      <path
+          d="M9.5 12.5H8C6.89543 12.5 6 13.3954 6 14.5V16C6 17.1046 6.89543 18 8 18H9.5C10.6046 18 11.5 17.1046 11.5 16V14.5C11.5 13.3954 10.6046 12.5 9.5 12.5Z"
+          fill="white" fill-opacity="0.5"/>
+      <path
+          d="M16 12.5H14.5C13.3954 12.5 12.5 13.3954 12.5 14.5V16C12.5 17.1046 13.3954 18 14.5 18H16C17.1046 18 18 17.1046 18 16V14.5C18 13.3954 17.1046 12.5 16 12.5Z"
+          fill="white" fill-opacity="0.5"/>
+    </g>
+    <defs>
+      <clipPath id="clip0_3837_892">
+        <rect width="12" height="12" fill="white" transform="translate(6 6)"/>
+      </clipPath>
+    </defs>
+  </svg>
+</template>
+
+<script setup>
+</script>
+
+<style scoped>
+
+</style>

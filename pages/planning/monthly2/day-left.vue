@@ -1,0 +1,121 @@
+<template>
+  <div v-click-outside="clickOutside">
+    <div class="mt-[29px]">
+      <span class="text-[24px] font-semibold"> Выполнение плана </span>
+    </div>
+
+    <div class="mt-4 grid grid-cols-4 gap-5">
+      <PlanningMonthly2TopTabs
+        :amount="'0%'"
+        :icon="'puls'"
+        :text="'Пульс'"
+        :edit="'edit'"
+        class="bg-[#FFDBDB]"
+        @click="changeDialogValue()"
+      />
+
+      <PlanningMonthly2TopTabs
+        :amount="'465'"
+        :icon="'calendar'"
+        :text="'Кол-во рабочий дней'"
+        class="bg-[#E9F1F2]"
+        @click="changeDialog2Value()"
+      />
+
+      <NuxtLink to="/planning/monthly2/check">
+        <PlanningMonthly2TopTabs
+          :amount="'465'"
+          :icon="'check'"
+          :text="'Отработано'"
+          class="bg-[#EAF2E9]"
+        />
+      </NuxtLink>
+
+      <NuxtLink to="/planning/monthly2/day-left">
+        <PlanningMonthly2TopTabs
+          :amount="'465'"
+          :icon="'hourGlass'"
+          :text="'Остались дни'"
+          class="bg-[#E9EBF2]"
+        />
+      </NuxtLink>
+    </div>
+
+    <div class="mt-4">
+      <PlanningMonthly2WorkedOutProgressBar />
+    </div>
+
+    <div class="mt-6">
+      <PlanningMonthly2DayLeftFilterCard />
+    </div>
+
+    <div class="my-6">
+      <div class="flex items-center justify-end gap-[10px] -mb-9">
+        <div class="mt-1"><Checkbox /></div>
+        <div>Нарастающие результаты</div>
+      </div>
+      <DoubleTab
+        first-tab-name="По месяцам"
+        :borderless="true"
+        second-tab-name="По дням"
+      >
+        <template #first>
+          <PlanningMonthly2DayLeftDataTable :is-active="true" />
+        </template>
+        <template #second>
+          <PlanningMonthly2DayLeftDataTable :is-active="false" />
+        </template>
+      </DoubleTab>
+    </div>
+    <transition name="modal">
+      <div v-if="popUpIsOpen">
+        <d-modal
+          @closeDialog="onClosePopUp"
+          :name="'Настроить вес категорий'"
+          :dataContainerWidth="'824px'"
+        >
+          <PlanningMonthly2DataDialog />
+        </d-modal>
+      </div>
+    </transition>
+    <transition name="modal">
+      <div v-if="true">
+        <d-modal
+          @closeDialog="onClose2PopUp"
+          :name="'Кол-во рабочий дней'"
+          :dataContainerWidth="'774px'"
+        >
+          <PlanningMonthly2Calendar />
+        </d-modal>
+      </div>
+    </transition>
+  </div>
+</template>
+
+<script setup lang="ts">
+import { ref } from "vue";
+// data
+const popUpIsOpen = ref(false);
+const popUp2IsOpen = ref(false);
+
+//methods
+function onClosePopUp() {
+  popUpIsOpen.value = false;
+}
+
+function onClose2PopUp() {
+  popUp2IsOpen.value = false;
+}
+
+function clickOutside() {
+  popUpIsOpen.value = false;
+  popUp2IsOpen.value = false;
+}
+function changeDialogValue() {
+  popUpIsOpen.value = !popUpIsOpen.value;
+}
+
+function changeDialog2Value() {
+  popUp2IsOpen.value = !popUp2IsOpen.value;
+}
+</script>

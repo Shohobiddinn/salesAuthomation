@@ -1,0 +1,91 @@
+<template>
+  <div class="rounded-lg bg-white border-grey py-3">
+    <div class="flex flex-row gap-4 px-4 items-center">
+      <div @click="draggable = true">
+        <i-btn>
+          <IconColsSVG />
+        </i-btn>
+      </div>
+      <table-filter :templates="rejectsStore.templates"></table-filter>
+      <div>
+        <search-input @change="rejectsStore.search" class="w-full h-38px" />
+      </div>
+      <div>
+        <excel-btn :size="'340kb'"></excel-btn>
+      </div>
+    </div>
+    <div class="mt-3 w-full overflow-auto">
+      <data-table
+        :headers="rejectsStore.templates"
+        @sort="rejectsStore.sortData"
+        :sorted="rejectsStore.params.order_by"
+      >
+        <template #body>
+          <c-tr v-for="data in rejectsStore.data?.items" :key="data">
+            <c-td v-for="key in rejectsStore.templates" :key="key">
+              <div v-if="key.checked">
+                {{ data[key.key] }}
+              </div>
+            </c-td>
+            <c-td class="">
+              <div class="p-2 td-shadow">
+                <IconEdit
+                  @click="() => dialogStore.edit({ ...data })"
+                ></IconEdit>
+              </div>
+            </c-td>
+          </c-tr>
+        </template>
+      </data-table>
+    </div>
+    <div class="flex justify-between w-full">
+      <div class="flex p-3 gap-2 items-center">
+        <span class="secondary-gray-text fs-14"> Показать по </span>
+        <page-size-btn
+          :current-size="rejectsStore.params.page_size"
+          @setPageSize="rejectsStore.setPageSize"
+        />
+      </div>
+      <div class="p-3">
+        <page-index
+          :available-pages="rejectsStore.data?.total_pages"
+          :current-page="rejectsStore.data?.page_number"
+          @setPage="rejectsStore.setPage"
+        />
+      </div>
+    </div>
+  </div>
+  <transition name="modal">
+    <div v-if="draggable">
+      <d-modal @closeDialog="draggableDialog" name="Управление меню таблицы">
+        <drag-and-drop
+          @change="change"
+          :templates="rejectsStore.templates"
+        ></drag-and-drop>
+      </d-modal>
+    </div>
+  </transition>
+</template>
+
+<script setup lang="ts">
+// Props
+const props = defineProps({
+  rejectsStore: Object,
+});
+
+// State
+const draggable = ref(false);
+
+// Stores
+const dialogStore = useDialogStore("rejects");
+
+function change(param: any) {
+  props.rejectsStore.templates = param;
+  draggable.value = false;
+}
+function draggableDialog() {
+  draggable.value = false;
+}
+</script>
+
+<style scoped></style>

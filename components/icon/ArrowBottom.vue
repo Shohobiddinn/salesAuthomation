@@ -1,0 +1,15 @@
+<template>
+  <svg width="8" height="6" viewBox="0 0 8 6" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <path :fill="color ? 'white' : 'black'" fill-rule="evenodd" clip-rule="evenodd" d="M7.81501 0.684984C8.06166 0.931629 8.06166 1.33153 7.81501 1.57815L4.44658 4.94658C4.19993 5.19323 3.80009 5.19323 3.55344 4.94658L0.184984 1.57815C-0.0616612 1.33153 -0.0616612 0.931629 0.184984 0.684984C0.431629 0.438339 0.831529 0.438339 1.07817 0.684984L4.00001 3.60679L6.92187 0.684984C7.16852 0.438339 7.56836 0.438339 7.81501 0.684984Z"  fill-opacity="0.5"/>
+  </svg>
+</template>
+
+<script setup>
+const props = defineProps({
+  color:Boolean
+})
+</script>
+
+<style scoped>
+
+</style>
